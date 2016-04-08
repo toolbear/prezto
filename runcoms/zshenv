@@ -12,6 +12,15 @@ fi
 
 export ZLE_RPROMPT_INDENT=-1
 
+: ${TERM_PROFILE:=${ITERM_PROFILE}}
+if [[ ${TERM} != 'eterm-color' ]] ; then
+  if [[ $TERM_PROFILE =~ '(.*).(light|dark)(.256)?' ]] ; then
+    export TERM_BACKGROUND_MODE=$match[2]
+    BASE16_SHELL="${HOME}/.base16/shell/${(j,.,)match[1,2]}.sh"
+  fi
+  [[ -s ${BASE16_SHELL} ]] && source ${BASE16_SHELL}
+fi
+
 # folder shortcuts
 export MY="${HOME}/src/${USER}"
 export CLOUD="${HOME}/Mobile Documents/com~apple~CloudDocs"
