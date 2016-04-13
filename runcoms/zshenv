@@ -13,8 +13,10 @@ fi
 # provisioning
 export FACTERLIB="${HOME}/.facter"
 
+# RPROMPT flush against right margin
 export ZLE_RPROMPT_INDENT=-1
 
+# base16 color theme
 : ${TERM_PROFILE:=${ITERM_PROFILE}}
 if [[ ${TERM} != 'eterm-color' ]] ; then
   if [[ $TERM_PROFILE =~ '(.*).(light|dark)(.256)?' ]] ; then
