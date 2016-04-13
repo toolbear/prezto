@@ -16,3 +16,4 @@ unsetopt CORRECT
 
 # Aliases
 alias git=hub
+alias mkdirp='mkdir -p'
