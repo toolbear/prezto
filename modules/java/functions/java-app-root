@@ -1,0 +1,18 @@
+#
+# Displays the path to the Java application root directory.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Tim Taylor <tim@tool-man.org>
+
+local root_dir="$PWD"
+
+while [[ "$root_dir" != '/' ]]; do
+  if [[ -f "$root_dir/build.gradle" || -f "$root_dir/pom.xml" || -f "$root_dir/build.xml" || -f "$root_dir/project.clj" || -f "$root_dir/build.boot" || -f "$root_dir/build.sbt" ]]; then
+    print "$root_dir"
+    return 0
+  fi
+  root_dir="$root_dir:h"
+done
+
+return 1
