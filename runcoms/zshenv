@@ -15,3 +15,4 @@ export ZLE_RPROMPT_INDENT=-1
 # folder shortcuts
 export MY="${HOME}/src/${USER}"
 export CLOUD="${HOME}/Mobile Documents/com~apple~CloudDocs"
+typeset -r CLOUD MY
