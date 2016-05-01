@@ -2,16 +2,39 @@
 # Displays the path to the Java application root directory.
 #
 # Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
 #   Tim Taylor <tim@tool-man.org>
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
 
+local bf match
 local root_dir="$PWD"
 
+function buildfile() {
+  root_dir=$1
+  ls -1 "$root_dir/"{build.gradle,pom.xml,build.xml,project.clj,build.boot,build.sbt} 2>/dev/null |head -1
+  return 0
+}
+
 while [[ "$root_dir" != '/' ]]; do
-  if [[ -f "$root_dir/build.gradle" || -f "$root_dir/pom.xml" || -f "$root_dir/build.xml" || -f "$root_dir/project.clj" || -f "$root_dir/build.boot" || -f "$root_dir/build.sbt" ]]; then
-    print "$root_dir"
-    return 0
-  fi
+  bf=$(buildfile "$root_dir")
+  case $bf:t in
+    (build.gradle)
+      match=$root_dir
+      if [[ -d "$root_dir/.gradle" ]] ; then
+        print "$match"
+        return 0
+      fi
+      ;;
+    ('')
+      if [[ -n "$match" ]] ; then
+        print "$match"
+        return 0
+      fi
+      ;;
+    (*)
+      print "$match"
+      return 0
+      ;;
+  esac
   root_dir="$root_dir:h"
 done
 
