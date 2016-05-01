@@ -1,0 +1,14 @@
+#
+# Runs project's gradle wrapper if found; runs global gradle otherwise
+#
+# Authors:
+#   Tim Taylor <tim@tool-man.org>
+
+local app=$(java-app-root)
+if [[ $? -eq 0 && -f $app/gradlew ]] ; then
+  $app/gradlew "$@"
+else
+  command gradle "$@"
+fi
+
+return 0
