@@ -11,3 +11,7 @@ if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; t
 fi
 
 export ZLE_RPROMPT_INDENT=-1
+
+# folder shortcuts
+export MY="${HOME}/src/${USER}"
+export CLOUD="${HOME}/Mobile Documents/com~apple~CloudDocs"
